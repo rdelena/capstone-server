@@ -45,7 +45,7 @@ const updateRatingByID = (req, res) => {
   let sql = "UPDATE gamerating SET vote = ? WHERE ratingID = ?";
   sql = mysql.format(sql, [req.body.vote, req.params.id]);
 
-  pool.query(sql, (err, res) => {
+  pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.status(204).json();
   });
