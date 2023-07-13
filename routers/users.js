@@ -3,8 +3,6 @@ const usersController = require("../controllers/users");
 const router = express.Router();
 const { verifyJwt } = require("../middleware/auth");
 
-// verifyjwt middleware
-// router.get("/", usersController.getAllUsers);
 router.get("/", verifyJwt, usersController.getAllUsers);
 // router.get("/:id", usersController.getUserById);
 // router.post("/", usersController.createUser);
