@@ -4,9 +4,6 @@ const router = express.Router();
 const { verifyJwt } = require("../middleware/auth");
 
 router.get("/", verifyJwt, usersController.getAllUsers);
-// router.get("/:id", usersController.getUserById);
-// router.post("/", usersController.createUser);
-// router.put("/:id", usersController.updateUserById);
-// router.delete("/:first_name", usersController.deleteUserByFirstName);
+router.get("/:username", usersController.getUserByUsername);
 
 module.exports = router;

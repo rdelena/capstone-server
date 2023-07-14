@@ -46,13 +46,17 @@ const login = (req, res) => {
     bcrypt.compare(password, hashPwd).then((result) => {
       if (!result) return res.status(400).send("Invalid password");
 
-      const data = { ...rows[0] };
-      data.password = "REDACTED";
+      const { pwd, ...userData } = rows[0];
 
-      const token = jwt.sign(data, process.env.JWTSECRET);
-      res.json({
-        msg: "Login successful",
-        token,
+      bcrypt.compare(password, pwd).then((result) => {
+        if (!result) return res.status(400).send("Invalid password");
+
+        const token = jwt.sign({ username }, process.env.JWTSECRET);
+        res.json({
+          msg: "Login successful",
+          token,
+          username: userData.username,
+        });
       });
     });
   });

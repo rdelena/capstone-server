@@ -10,7 +10,6 @@ const verifyJwt = (req, res, next) => {
   if (signedToken) {
     try {
       let decodedToken = jwt.sign(signedToken, process.env.JWTSECRET);
-      console.log(decodedToken, "decoded Token");
       req.user_token = decodedToken;
       next();
     } catch (error) {
