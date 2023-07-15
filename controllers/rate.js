@@ -42,8 +42,8 @@ const createRating = async (req, res) => {
 
 // updateRatingByID
 const updateRatingByID = (req, res) => {
-  let sql = "UPDATE gamerating SET vote = ? WHERE ratingID = ?";
-  sql = mysql.format(sql, [req.body.vote, req.params.id]);
+  let sql = "UPDATE gamerating SET vote = ? WHERE userID = ?";
+  sql = mysql.format(sql, [req.body.vote, req.body.userID]);
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);
@@ -54,17 +54,13 @@ const updateRatingByID = (req, res) => {
 
 // DELETE a rating
 const deleteRating = (req, res) => {
-  const ratingId = req.params.id;
-  pool.query(
-    "DELETE FROM gamerating WHERE ratingID = ?",
-    [ratingId],
-    (err, results) => {
-      if (err) return handleSQLError(res, err);
-      if (results.affectedRows === 0)
-        return res.status(404).json({ error: "Rating not found" });
-      return res.status(200).json({ message: "Rating deleted successfully" });
-    }
-  );
+  let sql = "DELETE FROM gamerating WHERE userID = ?";
+  sql = mysql.format(sql, [req.params.userID]);
+
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err);
+    return res.json({ message: `Deleted ${results.affectedRows} user(s)` });
+  });
 };
 
 module.exports = {

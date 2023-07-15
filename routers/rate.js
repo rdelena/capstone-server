@@ -8,6 +8,6 @@ router.get("/", rateController.getAllRatings);
 router.get("/:id", rateController.getRatingById);
 router.post("/", rateController.createRating);
 router.put("/:id", rateController.updateRatingByID);
-router.delete("/:id", rateController.deleteRating);
+router.delete("/:userID", rateController.deleteRating);
 
 module.exports = router;
