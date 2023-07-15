@@ -26,6 +26,10 @@ const getRatingById = (req, res) => {
 
 // createRating
 const createRating = async (req, res) => {
+  // if (req.body.userID === null) {
+  //   return res.status(400).json({ error: "Invalid user ID" });
+  // }
+
   let sql = "INSERT IGNORE INTO gamerating (userID, vote) VALUES (?, ?)";
   sql = mysql.format(sql, [req.body.userID, req.body.vote]);
   pool.query(sql, (err, results) => {

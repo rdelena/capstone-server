@@ -4,10 +4,10 @@ const router = express.Router();
 const { verifyJwt } = require("../middleware/auth");
 
 // router.get("/", verifyJwt, rateController.getAllRatings);
-router.get("/", rateController.getAllRatings);
-router.get("/:id", rateController.getRatingById);
-router.post("/", rateController.createRating);
-router.put("/:id", rateController.updateRatingByID);
-router.delete("/:userID", rateController.deleteRating);
+router.get("/", verifyJwt, rateController.getAllRatings);
+router.get("/:id", verifyJwt, rateController.getRatingById);
+router.post("/", verifyJwt, rateController.createRating);
+router.put("/:id", verifyJwt, rateController.updateRatingByID);
+router.delete("/:userID", verifyJwt, rateController.deleteRating);
 
 module.exports = router;

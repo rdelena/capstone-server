@@ -27,6 +27,7 @@ const getCommentById = (req, res) => {
   );
 };
 
+// Posting A Comment
 const postComment = (req, res) => {
   let sql =
     "INSERT INTO comments (commentText, userID, username, parent_commentID) VALUES (?, ?, (SELECT username FROM user WHERE id = ?), ?)";
@@ -49,7 +50,6 @@ const postComment = (req, res) => {
 const postReply = (req, res) => {
   const { commentText, userID, parentCommentID } = req.body;
 
-  // Fetch the username based on the userID
   const getUsernameQuery = "SELECT username FROM user WHERE id = ?";
   const usernameValues = [userID];
 
