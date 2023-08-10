@@ -9,7 +9,6 @@ const getAllComments = (req, res) => {
   });
 };
 
-// Get Comments by ID
 const getCommentById = (req, res) => {
   const commentId = req.params.id;
   pool.query(
@@ -27,7 +26,6 @@ const getCommentById = (req, res) => {
   );
 };
 
-// Posting A Comment
 const postComment = (req, res) => {
   let sql =
     "INSERT INTO comments (commentText, userID, username, parent_commentID) VALUES (?, ?, (SELECT username FROM user WHERE id = ?), ?)";
@@ -84,7 +82,6 @@ const postReply = (req, res) => {
   );
 };
 
-// UPDATE an existing comment
 const updateCommentById = (req, res) => {
   let sql = "UPDATE comments SET commentText = ? WHERE commentID = ?";
   sql = mysql.format(sql, [req.body.commentText, req.params.id]);
