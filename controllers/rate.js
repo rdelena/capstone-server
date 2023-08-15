@@ -30,9 +30,9 @@ const createRating = async (req, res) => {
   sql = mysql.format(sql, [req.body.userID, req.body.vote]);
   pool.query(sql, (err, results) => {
     if (err) {
-      // if (results === 0) {
-      //   return res.status(400).json({ error: "User has already voted" });
-      // }
+      if (results === 0) {
+        return res.status(400).json({ error: "User has already voted" });
+      }
       return handleSQLError(res, err);
     }
     return res.json({ newId: results.insertId });

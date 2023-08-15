@@ -27,15 +27,12 @@ const getCommentById = (req, res) => {
 };
 
 const postComment = (req, res) => {
+  const { commentText, userID } = req.body;
+
   let sql =
     "INSERT INTO comments (commentText, userID, username, parent_commentID) VALUES (?, ?, (SELECT username FROM user WHERE id = ?), ?)";
 
-  sql = mysql.format(sql, [
-    req.body.commentText,
-    req.body.userID,
-    req.body.userID,
-    null,
-  ]);
+  sql = mysql.format(sql, [commentText, userID, userID, null]);
   pool.query(sql, (err, results) => {
     if (err) {
       return handleSQLError(res, err);
