@@ -4,6 +4,6 @@ const router = express.Router();
 const { verifyJwt } = require("../middleware/auth");
 
 router.get("/", commentController.getAllComments);
-router.post("/", verifyJwt, commentController.postComment);
+router.post("/", commentController.postComment);
 
 module.exports = router;
