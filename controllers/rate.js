@@ -9,7 +9,6 @@ const getAllRatings = (req, res) => {
   });
 };
 
-// GET a specific rating by ID
 const getRatingById = (req, res) => {
   const ratingId = req.params.id;
   pool.query(
@@ -24,7 +23,6 @@ const getRatingById = (req, res) => {
   );
 };
 
-// createRating
 const createRating = async (req, res) => {
   let sql = "INSERT INTO gamerating (userID, vote) VALUES (?, ?)";
   sql = mysql.format(sql, [req.body.userID, req.body.vote]);
@@ -40,7 +38,6 @@ const createRating = async (req, res) => {
   console.log(sql);
 };
 
-// updateRatingByID
 const updateRatingByID = (req, res) => {
   let sql = "UPDATE gamerating SET vote = ? WHERE userID = ?";
   sql = mysql.format(sql, [req.body.vote, req.body.userID]);
@@ -52,7 +49,6 @@ const updateRatingByID = (req, res) => {
   console.log(sql);
 };
 
-// DELETE a rating
 const deleteRating = (req, res) => {
   let sql = "DELETE FROM gamerating WHERE userID = ?";
   sql = mysql.format(sql, [req.params.userID]);
